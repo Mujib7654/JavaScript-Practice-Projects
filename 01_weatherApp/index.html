@@ -13,7 +13,7 @@
             <button><img src="./images/search.png" alt="searchButtonimage"></button>
         </div>
         <div class="weather">
-            <img src="./images/rain.png" alt="weather-icon">
+            <img src="./images/rain.png" class="weather-icon">
             <h1 class="temp">22°c</h1>
             <h2 class="city">New York</h2>
             <div class="details">
@@ -27,12 +27,29 @@
                 <div class="col">
                     <img src="./images/wind.png">
                     <div>
-                        <p class="humidity">15 km/hr</p>
+                        <p class="wind">15 km/hr</p>
                         <p>Wind Speed</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const apiKey = '85318f698088ac0a16ac33a3ee5c4943';
+        const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=germany&units=metric';
+
+        async function checkWeather() {
+            const response = await fetch(apiUrl + `&appid=${apiKey}`);
+            var data = await response.json();
+            console.log(data);
+
+            document.querySelector('.city').innerHTML = data.name;
+            document.querySelector('.temp').innerHTML = data.main.temp;
+            document.querySelector('.humidity').innerHTML = data.main.humidity;
+            document.querySelector('.wind').innerHTML = data.wind.speed;
+        }
+        checkWeather();
+    </script>
 </body>
 </html>
